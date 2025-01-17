@@ -4,17 +4,37 @@ import uvicorn
 
 app = FastAPI()
 
+medicamentos = [
+    {
+        "id":1,
+        "nombre":"paracetamol",
+        "cantidad":"4",
+        "fecha_vencimiento":"25/10/2025"
+    },
+    {
+        "id":2,
+        "nombre":"grabol",
+        "cantidad":"6",
+        "fecha_vencimiento":"15/02/2025"
+    }
+]
+
 @app.get('/')
 def message():
-    return 'hola bitpro bienvenido a fastapi tu primer backend'
+    return 'BITPRO FARMACIA!!'
 
-@app.get('/jose')
-def message():
-    return 'esto es about de farmacia'
+@app.get('/medicamentos')
+def get_medicamento():
+    
+    return medicamentos
 
-@app.get('/home')
-def message():
-    return 'este es el home'
+@app.get('/medicamento/{id}')
+def get_id_medicamento(id):
+    for medicamento in medicamentos:
+        if medicamento['id'] == int(id):
+            return medicamento
+        
+    return "medicamento no encontrado"
 
 
 #como dejar de utilizar el comando de uvicorn #uvicorn main:app
