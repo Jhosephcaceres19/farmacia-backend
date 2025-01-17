@@ -8,13 +8,13 @@ medicamentos = [
     {
         "id":1,
         "nombre":"paracetamol",
-        "cantidad":"4",
+        "cantidad":6,
         "fecha_vencimiento":"25/10/2025"
     },
     {
         "id":2,
         "nombre":"grabol",
-        "cantidad":"6",
+        "cantidad":6,
         "fecha_vencimiento":"15/02/2025"
     }
 ]
@@ -35,6 +35,14 @@ def get_id_medicamento(id):
             return medicamento
         
     return "medicamento no encontrado"
+
+#seleccionar por id y fecha de vencimiento || cantidad
+@app.get('/medicamento/{id}/cantidad/{cantidad}')
+def get_medicamento(id,cantidad):
+    for medicamento in medicamentos:
+        if medicamento['id']==int(id) and medicamento['cantidad']== int(cantidad):
+            return medicamento
+    return "usuario con fecha de vencimiento no encontrado"
 
 
 #como dejar de utilizar el comando de uvicorn #uvicorn main:app
